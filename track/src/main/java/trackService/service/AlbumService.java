@@ -18,7 +18,7 @@ public class AlbumService {
   }
 
   public boolean update(Album album) {
-    Album albumResult = this.albumDAO.get(album.getId());
+    Album albumResult = albumDAO.get(album.getId());
 
     if (albumResult == null) { return false; }
 
@@ -27,17 +27,25 @@ public class AlbumService {
   }
 
   public void deleteAlbum(Integer albumId) {
-    Album album = this.albumDAO.get(albumId);
+    Album album = albumDAO.get(albumId);
     if (album == null) { return; }
     albumDAO.delete(albumId);
   }
 
   public Album getAlbumById(Integer albumId) {
-    return this.albumDAO.get(albumId);
+    return albumDAO.get(albumId);
   }
 
   public List<Album> getAllAlbums() {
-    return this.albumDAO.getAll();
+    return albumDAO.getAll();
+  }
+
+  public void clearDatabase() {
+    albumDAO.clearDatabase();
+  }
+
+  public void initDatabase() {
+    albumDAO.initDatabase();
   }
 //
 //  public List<Album> getAlbumByTitle(String title) {
