@@ -36,6 +36,17 @@ public class AlbumController {
     return ResponseEntity.ok().body(albums);
   }
 
+  @GetMapping(value="/{id}")
+  public ResponseEntity findById(@PathVariable int id) {
+    Album album = albumService.get(id);
+
+    if (album == null) {
+      return ResponseEntity.notFound().build();
+    } else {
+      return ResponseEntity.ok().body(album);
+    }
+  }
+
   @PostMapping
   public ResponseEntity create(@RequestBody Album album) {
     Album createdAlbum = albumService.create(album);
@@ -49,7 +60,9 @@ public class AlbumController {
     if (!updated) {
       return ResponseEntity.unprocessableEntity().build();
     }
-    URI newResource = uriCreator.getURI(id);
+    // TODO:
+    //  - reload
+    //  - return reloadedAlbum
     return ResponseEntity.accepted().body(album);
   }
 

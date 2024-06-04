@@ -1,7 +1,6 @@
 package trackService.model.album;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +8,6 @@ import java.util.Set;
 import trackService.model.track.Track;
 
 public class Album {
-
   private Integer id;
   private String title;
   Set<Track> tracks;
