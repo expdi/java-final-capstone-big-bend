@@ -2,16 +2,20 @@ package trackService.model.album;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import trackService.model.track.Track;
 
 public class Album {
 
   private Integer id;
   private String title;
-  Collection<Track>  tracks;
+  Set<Track> tracks;
   LocalDate issueDate;
 
-  public Album(Integer id, String title, Collection<Track> tracks, LocalDate issueDate) {
+  public Album(Integer id, String title, Set<Track> tracks, LocalDate issueDate) {
     this.id = id;
     this.title = title;
     this.tracks = tracks;
@@ -34,11 +38,20 @@ public class Album {
     this.title = title;
   }
 
-  public Collection<Track> getTracks() {
-    return tracks;
+  public List<Track> getTracks() {
+    return Optional.ofNullable(tracks).orElse(Collections.emptySet()).stream().toList();
   }
 
-  public void setTracks(Collection<Track> tracks) {
+  public void addTrack(Track track) {
+    if (tracks == null) {
+      tracks = Set.of(track);
+    } else {
+      tracks.add(track);
+    }
+
+  }
+
+  public void setTracks(Set<Track> tracks) {
     this.tracks = tracks;
   }
 

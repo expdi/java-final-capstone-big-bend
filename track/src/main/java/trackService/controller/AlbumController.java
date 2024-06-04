@@ -31,7 +31,7 @@ public class AlbumController {
 
   @GetMapping
   public ResponseEntity findAll() {
-    List<Album> albums = albumService.getAllAlbums();
+    List<Album> albums = albumService.getAll();
 
     return ResponseEntity.ok().body(albums);
   }
@@ -56,7 +56,7 @@ public class AlbumController {
   @DeleteMapping("/{id}")
   public ResponseEntity delete(@PathVariable int id) {
     try {
-      albumService.deleteAlbum(id);
+      albumService.delete(id);
       return ResponseEntity.accepted().build();
     } catch (NoSuchElementException e) {
       return ResponseEntity.notFound().build();

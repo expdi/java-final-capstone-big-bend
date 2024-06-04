@@ -26,17 +26,17 @@ public class AlbumService {
     return true;
   }
 
-  public void deleteAlbum(Integer albumId) {
+  public void delete(Integer albumId) {
     Album album = albumDAO.get(albumId);
     if (album == null) { return; }
     albumDAO.delete(albumId);
   }
 
-  public Album getAlbumById(Integer albumId) {
+  public Album get(Integer albumId) {
     return albumDAO.get(albumId);
   }
 
-  public List<Album> getAllAlbums() {
+  public List<Album> getAll() {
     return albumDAO.getAll();
   }
 
