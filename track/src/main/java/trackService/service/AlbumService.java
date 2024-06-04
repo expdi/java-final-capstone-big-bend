@@ -27,8 +27,6 @@ public class AlbumService {
   }
 
   public void delete(Integer albumId) {
-    Album album = albumDAO.get(albumId);
-    if (album == null) { return; }
     albumDAO.delete(albumId);
   }
 

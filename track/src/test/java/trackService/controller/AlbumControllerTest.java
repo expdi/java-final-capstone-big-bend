@@ -5,6 +5,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -103,7 +104,7 @@ public class AlbumControllerTest {
     Album mockAlbum = MockAlbumFactory.defaultAlbum();
     mockAlbum.setId(1);
     doReturn(true).when(albumService).update(Mockito.any(Album.class));
-
+    doReturn(mockAlbum).when(albumService).get(1);
 
     String content = objectMapper.writeValueAsString(mockAlbum);
 
@@ -122,6 +123,75 @@ public class AlbumControllerTest {
   @Test
   @DisplayName("AlbumController#PUT - /albums/{id} - Returns 404 When Id Not Found")
   void AlbumController_PutAlbum_Returns404WhenIdNotFound() throws Exception {
-    // TODO
+    Album mockAlbum = MockAlbumFactory.defaultAlbum();
+    mockAlbum.setId(1);
+    String content = objectMapper.writeValueAsString(mockAlbum);
+
+    doReturn(null).when(albumService).get(1);
+
+    ResultActions res = mockMvc.perform(
+        put("/albums/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(content)
+    );
+
+    res.andExpect(status().isNotFound());
+  }
+
+  @Test
+  @DisplayName("AlbumController#PUT - /albums/{id} - Returns 422 When Update Fails")
+  void AlbumController_PutAlbum_Returns422WhenUpdateFails() throws Exception {
+    Album mockAlbum = MockAlbumFactory.defaultAlbum();
+    mockAlbum.setId(1);
+    String content = objectMapper.writeValueAsString(mockAlbum);
+
+    doReturn(mockAlbum).when(albumService).get(1);
+    doReturn(false).when(albumService).update(Mockito.any(Album.class));
+
+    ResultActions res = mockMvc.perform(
+      put("/albums/1")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(content)
+    );
+
+    res.andExpect(status().isUnprocessableEntity());
+  }
+
+  @Test
+  @DisplayName("AlbumController#DELETE - /albums/{id} - Deletes Record")
+  void AlbumController_DeleteAlbum_ReturnsDeletedRecord() throws Exception {
+    Album mockAlbum = MockAlbumFactory.defaultAlbum();
+    mockAlbum.setId(1);
+
+    // first lookup finds album to delete
+    // second lookup finds null as album as been deleted
+    doReturn(mockAlbum).doReturn(null).when(albumService).get(1);
+
+    ResultActions res = mockMvc.perform(delete("/albums/1"));
+
+    res.andExpect(status().isOk());
+  }
+
+  @Test
+  @DisplayName("AlbumController#DELETE - /albums/{id} - Returns 404 When id Not Found")
+  void AlbumController_DeleteAlbum_Returns404WhenIdNotFound() throws Exception {
+    doReturn(null).when(albumService).get(1);
+    ResultActions res = mockMvc.perform(delete("/albums/1"));
+    res.andExpect(status().isNotFound());
+  }
+
+  @Test
+  @DisplayName("AlbumController#DELETE - /albums/{id} - Returns 422 When Delete Fails")
+  void AlbumController_DeleteAlbum_Returns422WhenDeleteFails() throws Exception {
+    Album mockAlbum = MockAlbumFactory.defaultAlbum();
+    mockAlbum.setId(1);
+
+    // first lookup finds album to delete
+    // second lookup finds album also because delete failed
+    doReturn(mockAlbum).doReturn(mockAlbum).when(albumService).get(1);
+
+    ResultActions res = mockMvc.perform(delete("/albums/1"));
+
+    res.andExpect(status().isUnprocessableEntity());
   }
 }

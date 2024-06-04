@@ -56,23 +56,32 @@ public class AlbumController {
 
   @PutMapping("/{id}")
   public ResponseEntity update(@PathVariable int id, @RequestBody Album album) {
-    boolean updated = albumService.update(album);
-    if (!updated) {
+    Album loadedAlbum = albumService.get(id);
+    if (loadedAlbum == null) {
+      return ResponseEntity.notFound().build();
+    }
+
+    if (!albumService.update(album)) {
       return ResponseEntity.unprocessableEntity().build();
     }
-    // TODO:
-    //  - reload
-    //  - return reloadedAlbum
-    return ResponseEntity.accepted().body(album);
+    Album reloadedAlbum = albumService.get(id);
+    return ResponseEntity.accepted().body(reloadedAlbum);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity delete(@PathVariable int id) {
-    try {
-      albumService.delete(id);
-      return ResponseEntity.accepted().build();
-    } catch (NoSuchElementException e) {
+    Album loadedAlbum = albumService.get(id);
+    if (loadedAlbum == null) {
       return ResponseEntity.notFound().build();
     }
+
+    albumService.delete(id);
+    Album reloadedAlbum = albumService.get(id);
+
+    if (reloadedAlbum != null) {
+      return ResponseEntity.unprocessableEntity().build();
+    }
+
+    return ResponseEntity.ok().build();
   }
 }
