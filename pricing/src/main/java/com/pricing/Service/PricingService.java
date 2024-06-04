@@ -1,6 +1,6 @@
-package PricingService.Service;
+package com.pricing.Service;
 
-import PricingService.DOA.PricingServiceDOA;
+import com.pricing.DOA.PricingServiceDOA;
 
 public class PricingService {
 
