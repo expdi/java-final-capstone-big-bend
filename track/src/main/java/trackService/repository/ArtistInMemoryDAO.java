@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class ArtistInMemoryDAO implements BaseDAO<Artist>{
+public class    ArtistInMemoryDAO implements BaseDAO<Artist>{
 
     private static int nextId;
     private HashMap<Integer, Artist> artists = new HashMap<>();

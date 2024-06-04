@@ -30,10 +30,8 @@ public class TrackService {
     public Track create(Track track) {
         TrackBuilder trackBuilder = new TrackBuilder();
         trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate());
-        for (Artist artist: track.getArtists()){
-            Artist validArtist = this.artistService.getValidArtist(artist);
-            trackBuilder.addArtist(validArtist);
-        }
+        Artist validArtist = this.artistService.getValidArtist(track.getArtists());
+        trackBuilder.addArtist(validArtist);
         Track builderTrack = trackBuilder.build();
 
         trackDAO.create(builderTrack);
