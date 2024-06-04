@@ -1,21 +1,36 @@
 package trackService.model.track;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name="track")
 public class Track {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+    @Column(name="title")
     private String title;
-    private List<Artist> artists;
+    @Column(name="album")
     private String album;
+    @Column(name="issueDate")
     private LocalDate issueDate;
+    @Column(name="durationInSeconds")
     private int durationInSeconds;
+    @Column(name="trackMediaType")
     private TrackMediaType trackMediaType;
+    @Column(name="language")
     private String language;
+    @ManyToOne
+    @JoinColumn(name="id",nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Artist artists;
+
 
 
     private Double price;
@@ -24,15 +39,22 @@ public class Track {
 
     // empty constructor //
 
-    public Track(){this.artists= new ArrayList<>();}
+    public Track(){this.artists= new Artist();}
 
 
-    public Track(String title){this.title=title; this.artists= new ArrayList<>();}
+    public Track(String title){this.title=title; this.artists= new Artist();}
 
     public enum TrackMediaType {
         OGG, MP3, FLAC, WAV;
     }
 
+    public Artist getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Artist artists) {
+        this.artists = artists;
+    }
     public int getId() {
         return id;
     }
@@ -47,14 +69,6 @@ public class Track {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Artist> getArtists() {
-        return artists;
-    }
-
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
     }
 
     public String getAlbum() {
