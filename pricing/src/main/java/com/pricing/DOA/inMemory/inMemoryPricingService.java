@@ -1,6 +1,6 @@
-package PricingService.DOA.inMemory;
+package com.pricing.DOA.inMemory;
 
-import PricingService.DOA.PricingServiceDOA;
+import com.pricing.DOA.PricingServiceDOA;
 
 public class inMemoryPricingService implements PricingServiceDOA {
 

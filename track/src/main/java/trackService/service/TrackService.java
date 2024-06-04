@@ -22,6 +22,8 @@ public class TrackService {
     @Autowired
     private ArtistService artistService;
 
+    @Autowired
+    private PricingClient pricingClient;
 
     //1.Basic Create, Update, Delete functionality
 
@@ -66,10 +68,9 @@ public boolean deleteTrack(int trackId){
         if (track == null){
             return null;
         }
-//        RestClient restClient = RestClient.builder().baseUrl("http://localhost:8089").build();
-//        String body = restClient.get().uri("/track/" + track.getDurationInSeconds()).retrieve().body(String.class);
-//        Double price = Double.parseDouble(body);
-//        track.setPrice(price);
+
+        double trackPrice = pricingClient.getTrackPrice(id);
+        track.setPrice(trackPrice);
         return track;
     }
 
