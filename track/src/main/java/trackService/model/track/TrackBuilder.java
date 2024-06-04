@@ -18,7 +18,7 @@ public class TrackBuilder {
 
     private String album;
 
-    private List<Artist> artists = new ArrayList<>();
+    private Artist artists = new Artist();
 
 
     public TrackBuilder startBuilder(String title) {
@@ -51,7 +51,7 @@ public class TrackBuilder {
     }
 
     public TrackBuilder addArtist(Artist artist) {
-        this.artists.add(artist);
+        this.artists = artist;
         return this;
     }
 
