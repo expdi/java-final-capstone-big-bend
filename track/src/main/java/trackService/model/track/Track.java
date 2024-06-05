@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 @Entity
 @Table(name="track")
 public class Track {
@@ -27,9 +26,9 @@ public class Track {
     @Column(name="language")
     private String language;
     @ManyToOne
-    @JoinColumn(name="id",nullable = false)
+    @JoinColumn(name="artist_id",nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Artist artists;
+    private Artist artist;
 
 
 
@@ -39,21 +38,21 @@ public class Track {
 
     // empty constructor //
 
-    public Track(){this.artists= new Artist();}
+    public Track(){this.artist = new Artist();}
 
 
-    public Track(String title){this.title=title; this.artists= new Artist();}
+    public Track(String title){this.title=title; this.artist = new Artist();}
 
     public enum TrackMediaType {
         OGG, MP3, FLAC, WAV;
     }
 
-    public Artist getArtists() {
-        return artists;
+    public Artist getArtist() {
+        return artist;
     }
 
-    public void setArtists(Artist artists) {
-        this.artists = artists;
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
     public int getId() {
         return id;
@@ -125,7 +124,7 @@ public class Track {
         return "Track{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", artists=" + artists +
+                ", artist=" + artist +
                 ", album=" + album +
                 ", issueDate=" + issueDate +
                 ", durationInSeconds=" + durationInSeconds +

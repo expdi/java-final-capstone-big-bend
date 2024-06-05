@@ -3,7 +3,6 @@ package trackService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 import trackService.model.artist.Artist;
 import trackService.model.track.Track;
 import trackService.model.track.TrackBuilder;
@@ -30,7 +29,7 @@ public class TrackService {
     public Track create(Track track) {
         TrackBuilder trackBuilder = new TrackBuilder();
         trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate());
-        Artist validArtist = this.artistService.getValidArtist(track.getArtists());
+        Artist validArtist = this.artistService.getValidArtist(track.getArtist());
         trackBuilder.addArtist(validArtist);
         Track builderTrack = trackBuilder.build();
 
