@@ -5,14 +5,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import jakarta.persistence.*;
 import trackService.model.track.Track;
-
+@Entity
+@Table(name="album")
 public class Album {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="id_album")
   private Integer id;
+  @Column(name="title")
   private String title;
-  Set<Track> tracks;
+  @Column(name="issueDate")
   LocalDate issueDate;
+  @OneToMany(mappedBy = "album")
+  Set<Track> tracks;
 
+  public Album(){
+
+  }
   public Album(Integer id, String title, Set<Track> tracks, LocalDate issueDate) {
     this.id = id;
     this.title = title;
