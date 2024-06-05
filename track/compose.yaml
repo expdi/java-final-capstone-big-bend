@@ -1,0 +1,10 @@
+name: track
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=java-capstone'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=capstone'
+    ports:
+      - '5432'
