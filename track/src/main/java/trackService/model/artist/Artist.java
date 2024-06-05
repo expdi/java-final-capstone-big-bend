@@ -1,16 +1,24 @@
 package trackService.model.artist;
 
+import jakarta.persistence.*;
 import trackService.model.track.Track;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name="artist")
 public class Artist {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+    @Column(name="name")
     private String name;
+    @Column(name="musicGenre")
     private String musicGenre;
+    @Column(name="nationality")
     private String nationality;
+    @OneToMany(mappedBy = "artist")
     private List<Track> listOfTracks;
 
     //-----------------------------

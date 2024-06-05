@@ -9,7 +9,6 @@ import trackService.service.ArtistService;
 
 import java.net.URI;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/artist")
@@ -22,75 +21,47 @@ public class ArtistController {
     private UriCreator uriCreator;
 
     @GetMapping
-    public List<Artist> getAllArtist() {
+    public ResponseEntity<?> getAllArtist() {
         List<Artist> artists = artistService.getAllArtists();
-        return artists;
+        return ResponseEntity.ok().body(artists);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Artist> getArtistById(@PathVariable int id) {
+        Artist artistResult = artistService.getArtistById(id);
+        if (artistResult == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(artistResult);
     }
 
     @PostMapping
     public ResponseEntity<?> createArtist(@RequestBody Artist artist) {
-        Artist resultArtist = this.artistService.create(artist.getName(),artist.getMusicGenre());
+        Artist resultArtist = this.artistService.create(artist);
         URI newResource = uriCreator.getURI(resultArtist.getId());
         return ResponseEntity.created(newResource).body(resultArtist);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateArtist(@PathVariable("id") int id,@RequestBody Artist artist) {
+    @PutMapping
+    public ResponseEntity<?> updateArtist(@RequestBody Artist artist) {
         boolean updated = this.artistService.updateArtist(artist);
         if (!updated) {
             return ResponseEntity.notFound().build();
         }
         URI newResource = uriCreator.getURI(artist.getId());
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().build();
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteArtist(@PathVariable("id") int id) {
-        try {
-            this.artistService.deleteArtist(id);
-            return ResponseEntity.ok().build();
-        } catch (NoSuchElementException e) {
+        boolean updated = this.artistService.deleteArtist(id);
+        if (!updated) {
             return ResponseEntity.notFound().build();
         }
-
+        URI newResource = uriCreator.getURI(id);
+        return ResponseEntity.ok(newResource);
     }
-
 }
 
 
-
-//public class ArtistController {
-//
-//    @Autowired
-//    private ArtistService artistService;
-//
-//    @Autowired
-//    private UriCreator uriCreator;
-//
-//    @GetMapping
-//    public List<Artist> getAllArtists() {
-//        List<Artist> allArtists = artistService.getAllArtists();
-//        return allArtists;
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<?> addArtist(@RequestBody String artist, String musicGenre) {
-//        Artist newArtist = artistService.create(artist, musicGenre);
-//
-//        URI newResource = uriCreator.getURI(newArtist.getId());
-//        return ResponseEntity.ok(artist);
-//    }
-//}
-
-//@DeleteMapping
-//    public ResponseEntity<?> deleteArtist(@PathVariable("id") int id){
-//        void result = artistService.deleteArtist(id);
-//        if(!result){
-//            return ResponseEntity.status.I_AM_A_TEAPOT);body("No artist with id: " + id);
-//        }
-//        return ResponseEntity.noContent().build();
-//        }
-//}
-//
 

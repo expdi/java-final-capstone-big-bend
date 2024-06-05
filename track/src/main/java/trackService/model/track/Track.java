@@ -1,21 +1,35 @@
 package trackService.model.track;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
+@Entity
+@Table(name="track")
 public class Track {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+    @Column(name="title")
     private String title;
-    private List<Artist> artists;
+    @Column(name="album")
     private String album;
+    @Column(name="issueDate")
     private LocalDate issueDate;
+    @Column(name="durationInSeconds")
     private int durationInSeconds;
+    @Column(name="trackMediaType")
     private TrackMediaType trackMediaType;
+    @Column(name="language")
     private String language;
+    @ManyToOne
+    @JoinColumn(name="artist_id",nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Artist artist;
+
 
 
     private Double price;
@@ -24,15 +38,22 @@ public class Track {
 
     // empty constructor //
 
-    public Track(){this.artists= new ArrayList<>();}
+    public Track(){this.artist = new Artist();}
 
 
-    public Track(String title){this.title=title; this.artists= new ArrayList<>();}
+    public Track(String title){this.title=title; this.artist = new Artist();}
 
     public enum TrackMediaType {
         OGG, MP3, FLAC, WAV;
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
     public int getId() {
         return id;
     }
@@ -47,14 +68,6 @@ public class Track {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Artist> getArtists() {
-        return artists;
-    }
-
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
     }
 
     public String getAlbum() {
@@ -111,7 +124,7 @@ public class Track {
         return "Track{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", artists=" + artists +
+                ", artist=" + artist +
                 ", album=" + album +
                 ", issueDate=" + issueDate +
                 ", durationInSeconds=" + durationInSeconds +

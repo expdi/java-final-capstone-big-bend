@@ -3,8 +3,6 @@ package trackService.model.track;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TrackBuilder {
 
@@ -18,7 +16,7 @@ public class TrackBuilder {
 
     private String album;
 
-    private List<Artist> artists = new ArrayList<>();
+    private Artist artist = new Artist();
 
 
     public TrackBuilder startBuilder(String title) {
@@ -51,7 +49,7 @@ public class TrackBuilder {
     }
 
     public TrackBuilder addArtist(Artist artist) {
-        this.artists.add(artist);
+        this.artist = artist;
         return this;
     }
 
@@ -62,7 +60,7 @@ public class TrackBuilder {
         track.setDurationInSeconds(this.durationInSeconds);
         track.setIssueDate(this.issueDate);
         track.setAlbum(this.album);
-        track.setArtists(artists);
+        track.setArtist(artist);
         return track;
     }
 
