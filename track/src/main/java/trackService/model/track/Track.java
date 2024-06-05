@@ -51,8 +51,8 @@ public class Track {
         return artist;
     }
 
-    public void setArtist(Artist artists) {
-        this.artist = artists;
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
     public int getId() {
         return id;
@@ -124,7 +124,7 @@ public class Track {
         return "Track{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", artists=" + artist +
+                ", artist=" + artist +
                 ", album=" + album +
                 ", issueDate=" + issueDate +
                 ", durationInSeconds=" + durationInSeconds +
