@@ -71,7 +71,6 @@ public boolean deleteTrack(int trackId){
         return track;
     }
 
-    //    Get Tracks with a specific media type
         public List<Track> getTracksByMediaType (Track.TrackMediaType trackMediaType){
             List<Track> trackList = trackDAO.getAll();
             ArrayList<Track> resultList = new ArrayList<>();
@@ -84,8 +83,6 @@ public boolean deleteTrack(int trackId){
             return resultList;
         }
 
-    // ----------------------------------------------//
-        //Get Tracks for a particular year
         public List<Track> getTracksByIssueYear (LocalDate issueDate){
             List<Track> trackByYear = trackDAO.getAll();
             ArrayList<Track> resultList = new ArrayList<>();
@@ -98,9 +95,6 @@ public boolean deleteTrack(int trackId){
             return resultList;
         }
 
-        //-----------------------------------------------//
-
-        //Get Tracks longer/shorter/equal to a specific duration
         public List<Track> getByDuration ( int durationInSeconds){
             List<Track> trackList = trackDAO.getAll();
             ArrayList<Track> resultList = new ArrayList<>();
@@ -127,7 +121,6 @@ public boolean deleteTrack(int trackId){
 
         }
 
-    //---------------------------------------------------//
 
     public void initDatabase() {
         this.trackDAO.initDatabase();
@@ -138,31 +131,3 @@ public boolean deleteTrack(int trackId){
     }
 
     }
-
-// public void deleteTrack(int id) {
-// this.trackDAO.delete(id);
-//}
-
-///------- CREATE A BUILDER ----------- ///
-// public void updateTrack(Track track) {
-//   this.trackDAO.update(track);
-//}
-
-//-----------------------------------------------------//
-
-// Get tracks for a particular artist
-//    public List<Track> getTracksByArtist(String artistName) {
-//
-//        List<Track> trackList = trackDAO.getAll();
-//
-//        ArrayList<Track> resultList = new ArrayList<>();
-//        for (Track track : trackList) {
-//
-//            for (Artist artist : track.getArtists()) {
-//
-//
-//                if (artist.getName().equals(artistName)) {
-//                    resultList.add(track);}
-//            }
-//        }
-//        return resultList;}

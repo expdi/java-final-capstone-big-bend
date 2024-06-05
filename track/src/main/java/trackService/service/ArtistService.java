@@ -18,11 +18,12 @@ public class ArtistService {
 
 // create update delete
 
-    public Artist create(String name, String musicGender) {
+    public Artist create(Artist artist) {
         ArtistBuilder artistBuilder = new ArtistBuilder();
-        Artist artist = artistBuilder.startArtistBuilder(name).addMusicGender(musicGender).build();
-        artistDAO.create(artist);
-        return artist;
+        artistBuilder.startArtistBuilder(artist.getName()).addMusicGender(artist.getMusicGenre());
+        Artist artistBuild = artistBuilder.build();
+        artistDAO.create(artistBuild);
+        return artistBuild;
     }
 
     public boolean updateArtist(Artist artist){
@@ -35,10 +36,13 @@ public class ArtistService {
         return false;
     }
 
-    public void deleteArtist(int artistId) {
+    public boolean deleteArtist(int artistId) {
         Artist artist = this.artistDAO.get(artistId);
-        if (artist != null)
+        if (artist != null){
             artistDAO.delete(artistId);
+            return true;
+        }
+        return false;
     }
 
     //2.Get an Artist by id
@@ -78,7 +82,7 @@ public class ArtistService {
         if (artistsByName.size() > 0) {
             return artistsByName.get(0);
         }
-        return this.create(artist.getName(), artist.getMusicGenre());
+        return this.create(artist);
     }
 
     //4.Get Artists for a particular track
@@ -111,37 +115,3 @@ public class ArtistService {
     }
 
 }
-
-
-
-
-
-//
-//
-//1.Basic Create, Update, Delete functionality
-//    public Artist create(String artistName, String musicGenre) {
-//        Artist artist = new Artist(artistName);
-//        artist.setMusicGenre(musicGenre);
-//        artist = artistDAO.create(artist);
-//        return artist;
-//    }
-//
-//
-//
-//
-//    public void updateArtist(Artist artist) {
-//
-//        this.artistDAO.update(artist);
-//    }
-//
-//
-//    public void deleteArtist(int artistId) {
-//        Artist artist = artistDAO.get(artistId);
-//        if (artist != null)
-//            artistDAO.delete(artistId);
-//    }
-//
-//     buscar pra ver se existe
-//     se  existir, Adicionar a lista
-//     se não existir, adicionar ao banco
-//
