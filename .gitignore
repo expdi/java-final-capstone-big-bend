@@ -35,6 +35,3 @@ build/
 .vscode/
 /.idea/
 /.idea/*
-
-### Please ignore Nate not knowing how to use Podman ###
-track/compose.yaml
