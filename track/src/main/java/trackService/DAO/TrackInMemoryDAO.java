@@ -1,12 +1,13 @@
-package trackService.repository;
+package trackService.DAO;
 
 import org.springframework.stereotype.Repository;
+import trackService.DAO.BaseDAO;
 import trackService.model.track.Track;
 import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class TrackInMemoryDAO implements BaseDAO<Track>{
+public class TrackInMemoryDAO implements BaseDAO<Track> {
 
     private static int nextId;
     private HashMap<Integer, Track> tracks = new HashMap<>();
