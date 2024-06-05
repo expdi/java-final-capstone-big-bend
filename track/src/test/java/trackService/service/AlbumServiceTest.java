@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import trackService.mockData.MockAlbumFactory;
 import trackService.mockData.MockTrackFactory;
 import trackService.model.album.Album;
 import trackService.model.track.Track;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class AlbumServiceTest {
 
   private AlbumService albumService;

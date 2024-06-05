@@ -18,7 +18,7 @@ public class Artist {
     private String musicGenre;
     @Column(name="nationality")
     private String nationality;
-    @OneToMany(mappedBy = "track")
+    @OneToMany(mappedBy = "artist")
     private List<Track> listOfTracks;
 
     //-----------------------------
