@@ -1,4 +1,4 @@
-name: track
+name: 'java-capstone'
 services:
   postgres:
     image: 'postgres:latest'
@@ -7,4 +7,4 @@ services:
       - 'POSTGRES_PASSWORD=password'
       - 'POSTGRES_USER=capstone'
     ports:
-      - '5432'
+      - '5432:5432'
