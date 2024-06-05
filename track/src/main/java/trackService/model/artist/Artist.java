@@ -10,7 +10,7 @@ import java.util.List;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id_artist")
     private int id;
     @Column(name="name")
     private String name;
