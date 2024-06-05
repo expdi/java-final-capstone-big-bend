@@ -2,6 +2,7 @@ package trackService.model.track;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import trackService.model.album.Album;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
@@ -11,12 +12,11 @@ import java.time.LocalDate;
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id_track")
     private int id;
     @Column(name="title")
     private String title;
-    @Column(name="album")
-    private String album;
+
     @Column(name="issueDate")
     private LocalDate issueDate;
     @Column(name="durationInSeconds")
@@ -30,6 +30,11 @@ public class Track {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Artist artist;
 
+    @ManyToOne
+    @JoinColumn(name="album_id",nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Album album;
+
 
 
     private Double price;
@@ -39,7 +44,6 @@ public class Track {
     // empty constructor //
 
     public Track(){this.artist = new Artist();}
-
 
     public Track(String title){this.title=title; this.artist = new Artist();}
 
@@ -70,11 +74,11 @@ public class Track {
         this.title = title;
     }
 
-    public String getAlbum() {
+    public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(String album) {
+    public void setAlbum(Album album) {
         this.album = album;
     }
 

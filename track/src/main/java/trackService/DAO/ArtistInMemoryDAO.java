@@ -1,4 +1,4 @@
-package trackService.repository;
+package trackService.DAO;
 
 import org.springframework.stereotype.Repository;
 import trackService.model.artist.Artist;
@@ -7,11 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class    ArtistInMemoryDAO implements BaseDAO<Artist>{
+public class    ArtistInMemoryDAO implements BaseDAO<Artist> {
 
     private static int nextId;
     private HashMap<Integer, Artist> artists = new HashMap<>();
 
+    public ArtistInMemoryDAO() {};
     @Override
     public Artist create(Artist artist) {
         artist.setId(nextId++);
