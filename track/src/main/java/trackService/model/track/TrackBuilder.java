@@ -16,7 +16,7 @@ public class TrackBuilder {
 
     private String album;
 
-    private Artist artists = new Artist();
+    private Artist artist = new Artist();
 
 
     public TrackBuilder startBuilder(String title) {
@@ -49,7 +49,7 @@ public class TrackBuilder {
     }
 
     public TrackBuilder addArtist(Artist artist) {
-        this.artists = artist;
+        this.artist = artist;
         return this;
     }
 
@@ -60,7 +60,7 @@ public class TrackBuilder {
         track.setDurationInSeconds(this.durationInSeconds);
         track.setIssueDate(this.issueDate);
         track.setAlbum(this.album);
-        track.setArtist(artists);
+        track.setArtist(artist);
         return track;
     }
 
