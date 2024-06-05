@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import trackService.model.artist.Artist;
 import trackService.model.artist.ArtistBuilder;
 import trackService.model.track.Track;
-import trackService.repository.BaseDAO;
+import trackService.DAO.BaseDAO;
 
 import java.util.ArrayList;
 import java.util.List;

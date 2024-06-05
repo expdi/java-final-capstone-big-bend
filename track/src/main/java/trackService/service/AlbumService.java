@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trackService.model.album.Album;
-import trackService.repository.BaseDAO;
+import trackService.DAO.BaseDAO;
 
 @Service
 public class AlbumService {
