@@ -1,11 +1,15 @@
 package trackService.service;
 
+import static org.mockito.Mockito.doReturn;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import trackService.model.track.Track;
 import trackService.model.track.TrackBuilder;
 
@@ -13,12 +17,14 @@ import java.time.LocalDate;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-
-
+@ActiveProfiles("test")
 public class TrackServiceTest {
 
     @Autowired
     TrackService trackService;
+
+    @MockBean
+    PricingClient pricingClient;
 
     @BeforeEach
     public void setup() {
@@ -40,11 +46,13 @@ public class TrackServiceTest {
 
     @Test
     public void testUpdateTrack() {
+        doReturn(1.23).when(pricingClient).getTrackPrice(0);
 
         String trackNewTitle = "Sun Song";
         Track track = this.trackService.getTrackById(0);
         track.setTitle(trackNewTitle);
         this.trackService.updateTrack(track);
+
 
         Track updatedTrackTitle = this.trackService.getTrackById(0);
 
@@ -64,6 +72,7 @@ public class TrackServiceTest {
 
     @Test
     public void testGeTrackById() {
+        doReturn(1.23).when(pricingClient).getTrackPrice(0);
         Track trackById = this.trackService.getTrackById(0);
 
 

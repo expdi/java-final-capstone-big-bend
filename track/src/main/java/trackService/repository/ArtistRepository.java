@@ -11,7 +11,7 @@ import java.util.List;
 public interface ArtistRepository extends JpaRepository<Artist,Integer> {
     Artist getArtistById(int idArtist);
 
-    @Query("SELECT a.name,t.title FROM Artist a INNER JOIN Track t ON a.id = t.artists.id WHERE a.id = :id")
+    @Query("SELECT a.name,t.title FROM Artist a INNER JOIN Track t ON a.id = t.artist.id WHERE a.id = :id")
     List<Object> getSongsAndArtistNameByArtistId(int id);
 
 }

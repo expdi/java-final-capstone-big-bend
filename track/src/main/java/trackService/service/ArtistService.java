@@ -56,9 +56,11 @@ public class ArtistService {
     //3.Get Artists by name
 
     public List<Artist> getArtistsByName(String name) {
-
         List<Artist> artistsList = artistDAO.getAll();
         ArrayList<Artist> resultList = new ArrayList<>();
+        if (name == null || name.isEmpty()) {
+            return resultList;
+        }
 
         for (Artist artist : artistsList) {
             if (artist.getName().equals(name)) {
@@ -70,6 +72,7 @@ public class ArtistService {
     }
 
     public Artist getValidArtist(Artist artist) {
+
         List<Artist> artistsByName = this.getArtistsByName(artist.getName());
 
         if (artistsByName.size() > 0) {
