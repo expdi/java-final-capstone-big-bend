@@ -8,32 +8,22 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import trackService.controller.ArtistController;
-import trackService.controller.UriCreator;
 import trackService.model.artist.Artist;
 import trackService.model.artist.ArtistBuilder;
-import trackService.model.track.Track;
-import trackService.model.track.TrackBuilder;
 import trackService.service.ArtistService;
 
-import java.awt.print.Book;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
-import java.util.List;
 
 import static java.nio.file.Paths.get;
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 public class ArtistControllerTest {
@@ -60,9 +50,7 @@ public class ArtistControllerTest {
         Mockito.verify(artistService).getArtistById(0);
     }
 
-    @Test
-    public void testGetAll() throws Exception {
-    }
+
 
     @Test
     public void testGetByIdNotFound(){
@@ -154,6 +142,5 @@ public class ArtistControllerTest {
 
         Mockito.verify(artistService).deleteArtist(1199);
     }
-
 
 }
