@@ -24,10 +24,7 @@ class TrackDataInit implements CommandLineRunner {
 
 	@Autowired
 	private TrackService service;
-	public void run(String... args) throws Exception{
-		TrackBuilder builder = new TrackBuilder();
-		Track sample = builder.startBuilder("Sample").addDurationInSeconds(100).build();
-		this.service.create(sample);
-
+	public void run(String... args) throws Exception {
+		System.out.println("Expeditors Big Bend - Java Capstone Application Started");
 	}
 }
