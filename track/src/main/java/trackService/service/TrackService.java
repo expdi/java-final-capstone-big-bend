@@ -28,10 +28,10 @@ public class TrackService {
 
     public Track create(Track track) {
         TrackBuilder trackBuilder = new TrackBuilder();
-        trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate());
+        trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate()).addTrackMediaType(track.getTrackMediaType());
         Artist validArtist = this.artistService.getValidArtist(track.getArtist());
         trackBuilder.addArtist(validArtist);
-        Track builderTrack = trackBuilder.build();
+        Track builderTrack = trackBuilder.build() ;
 
         trackDAO.create(builderTrack);
         return builderTrack;
@@ -71,29 +71,29 @@ public boolean deleteTrack(int trackId){
         return track;
     }
 
-        public List<Track> getTracksByMediaType (Track.TrackMediaType trackMediaType){
+        public List<Track> getTracksByMediaType (Track.TrackMediaType trackMediaType) {
             List<Track> trackList = trackDAO.getAll();
             ArrayList<Track> resultList = new ArrayList<>();
 
             for (Track track : trackList) {
-                if (track.getTrackMediaType().equals(trackMediaType)) {
+                if (track.getTrackMediaType() == (trackMediaType)) {
                     resultList.add(track);
                 }
             }
             return resultList;
         }
 
-        public List<Track> getTracksByIssueYear (LocalDate issueDate){
-            List<Track> trackByYear = trackDAO.getAll();
-            ArrayList<Track> resultList = new ArrayList<>();
+            public List<Track> getTracksByIssueYear (LocalDate issueDate){
+                List<Track> trackByYear = trackDAO.getAll();
+                ArrayList<Track> resultList = new ArrayList<>();
 
-            for (Track track : trackByYear) {
-                if (track.getIssueDate().getYear() == issueDate.getYear()) {
-                    resultList.add(track);
+                for (Track track : trackByYear) {
+                    if (track.getIssueDate().getYear() == issueDate.getYear()) {
+                        resultList.add(track);
+                    }
                 }
+                return resultList;
             }
-            return resultList;
-        }
 
         public List<Track> getByDuration ( int durationInSeconds){
             List<Track> trackList = trackDAO.getAll();
