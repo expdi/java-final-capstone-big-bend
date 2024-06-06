@@ -15,9 +15,13 @@ import trackService.service.ArtistService;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static java.nio.file.Paths.get;
 import static net.bytebuddy.matcher.ElementMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -141,6 +145,22 @@ public class ArtistControllerTest {
         Assertions.assertEquals(HttpStatus.NOT_FOUND, track.getStatusCode());
 
         Mockito.verify(artistService).deleteArtist(1199);
+    }
+
+    @Test
+    public void getAllArtistsOk(){
+        Artist SingerSin = new ArtistBuilder().startArtistBuilder("SingerSin").addMusicGender("Pop").build();
+        Artist SingerSad = new ArtistBuilder().startArtistBuilder("SingerSad").addMusicGender("Folk").build();
+        List<Artist> artists = Arrays.asList(SingerSad, SingerSin);
+
+        when(artistService.getAllArtists()).thenReturn(artists);
+
+        ResponseEntity<?> responseEntity = controller.getAllArtist();
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(responseEntity.getBody()).isEqualTo(artists);
+
     }
 
 }
