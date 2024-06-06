@@ -20,7 +20,10 @@ public class ArtistService {
 
     public Artist create(Artist artist) {
         ArtistBuilder artistBuilder = new ArtistBuilder();
-        artistBuilder.startArtistBuilder(artist.getName()).addMusicGender(artist.getMusicGenre());
+        artistBuilder
+            .startArtistBuilder(artist.getName())
+            .addMusicGender(artist.getMusicGenre())
+            .addNationality(artist.getNationality());
         Artist artistBuild = artistBuilder.build();
         artistDAO.create(artistBuild);
         return artistBuild;
