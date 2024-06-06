@@ -1,9 +1,9 @@
-name: 'java-capstone'
+name: 'java_capstone'
 services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=java-capstone'
+      - 'POSTGRES_DB=java_capstone'
       - 'POSTGRES_PASSWORD=password'
       - 'POSTGRES_USER=capstone'
     ports:
