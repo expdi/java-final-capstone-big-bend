@@ -58,7 +58,11 @@ public boolean deleteTrack(int trackId){
 }
 
     // ----------------------------------------------//
-    //    Get Tracks by ID
+    //    Get Tracks
+
+    public List<Track> getAll() {
+        return trackDAO.getAll();
+    }
 
     public Track getTrackById(int id) {
         Track track = this.trackDAO.get(id);
