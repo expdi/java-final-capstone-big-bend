@@ -12,7 +12,6 @@ import java.time.LocalDate;
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_track")
     private int id;
     @Column(name="title")
     private String title;
