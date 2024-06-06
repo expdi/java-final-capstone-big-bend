@@ -1,6 +1,7 @@
 package trackService.controller;
 
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,13 @@ public class TrackController {
 
     @Autowired
     private UriCreator uriCreator;
+
+    @GetMapping
+    public ResponseEntity<List<Track>> getAllTracks() {
+        List<Track> tracks = trackService.getAll();
+
+        return ResponseEntity.ok(tracks);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Track> getTrack(@PathVariable int id) {
