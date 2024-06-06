@@ -13,7 +13,6 @@ import trackService.model.track.Track;
 public class Album {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="id")
   private Integer id;
   @Column(name="title")
   private String title;
