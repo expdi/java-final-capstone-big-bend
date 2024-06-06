@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import trackService.model.artist.Artist;
+import trackService.model.artist.ArtistBuilder;
 import trackService.model.track.Track;
 import trackService.model.track.TrackBuilder;
 
@@ -119,6 +120,22 @@ public class TrackServiceTest {
 
 
     }
+
+    @Test
+    public void testGetAllTracks(){
+        TrackBuilder trackBuilder = new TrackBuilder();
+        trackBuilder.startBuilder("Joy Song").addDurationInSeconds(108).addTrackMediaType(Track.TrackMediaType.MP3);
+        Track newTrack = trackBuilder.build();
+        this.trackService.create(newTrack);
+
+        trackBuilder.startBuilder("Sad Song").addDurationInSeconds(108).addTrackMediaType(Track.TrackMediaType.OGG);
+        Track newTrack2 = trackBuilder.build();
+        this.trackService.create(newTrack2);
+
+        List<Track> result = trackService.getAll();
+        Assertions.assertEquals(3, result.size());
+    }
+
 }
 
 
