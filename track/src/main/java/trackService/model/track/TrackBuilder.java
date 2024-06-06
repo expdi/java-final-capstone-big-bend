@@ -3,6 +3,7 @@ package trackService.model.track;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class TrackBuilder {
 
@@ -61,7 +62,9 @@ public class TrackBuilder {
         track.setIssueDate(this.issueDate);
         track.setAlbum(this.album);
         track.setArtist(artist);
+        track.setUuid(UUID.randomUUID());
         return track;
+
     }
 
 }

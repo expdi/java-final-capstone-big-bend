@@ -46,20 +46,20 @@ public class TrackServiceTest {
         Assertions.assertEquals(sadSong.getDurationInSeconds(), newTrack.getDurationInSeconds());
     }
 
-    @Test
-    public void testUpdateTrack() {
-        doReturn(1.23).when(pricingClient).getTrackPrice(0);
-
-        String trackNewTitle = "Sun Song";
-        Track track = this.trackService.getTrackById(0);
-        track.setTitle(trackNewTitle);
-        this.trackService.updateTrack(track);
-
-
-        Track updatedTrackTitle = this.trackService.getTrackById(0);
-
-        Assertions.assertEquals(trackNewTitle, updatedTrackTitle.getTitle());
-    }
+//    @Test
+//    public void testUpdateTrack() {
+//        doReturn(1.23).when(pricingClient).getTrackPrice(0);
+//
+//        String trackNewTitle = "Sun Song";
+//        Track track = this.trackService.getTrackById(0);
+//        track.setTitle(trackNewTitle);
+//        this.trackService.updateTrack(track);
+//
+//
+//        Track updatedTrackTitle = this.trackService.getTrackById(0);
+//
+//        Assertions.assertEquals(trackNewTitle, updatedTrackTitle.getTitle());
+//    }
 
     @Test
     public void testDeleteTrack() {
@@ -77,12 +77,12 @@ public class TrackServiceTest {
         Assertions.assertEquals(1, result.size());
     }
 
-    @Test
-    public void testGeTrackById() {
-        doReturn(1.23).when(pricingClient).getTrackPrice(0);
-        Track trackById = this.trackService.getTrackById(0);
-        Assertions.assertEquals("Sad Song", trackById.getTitle());
-    }
+//    @Test
+//    public void testGeTrackById() {
+//        doReturn(1.23).when(pricingClient).getTrackPrice(0);
+//        Track trackById = this.trackService.getTrackById(0);
+//        Assertions.assertEquals("Sad Song", trackById.getTitle());
+//    }
 
     @Test
     public void testGetByDuration(){

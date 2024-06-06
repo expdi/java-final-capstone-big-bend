@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name="track")
@@ -15,6 +16,9 @@ public class Track {
     private int id;
     @Column(name="title")
     private String title;
+
+    @Column(name="uuid")
+    private UUID uuid;
     @Column(name="album")
     private String album;
     @Column(name="issueDate")
@@ -118,19 +122,27 @@ public class Track {
         this.price = price;
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     @Override
     public String toString() {
         return "Track{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", artist=" + artist +
-                ", album=" + album +
+                ", uuid=" + uuid +
+                ", album='" + album + '\'' +
                 ", issueDate=" + issueDate +
                 ", durationInSeconds=" + durationInSeconds +
                 ", trackMediaType=" + trackMediaType +
                 ", language='" + language + '\'' +
+                ", artist=" + artist +
+                ", price=" + price +
                 '}';
     }
-
 }
