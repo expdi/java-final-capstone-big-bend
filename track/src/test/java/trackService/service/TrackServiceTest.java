@@ -72,7 +72,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void testGetTracksByIssueYear(){
+    public void testGetTracksByIssueYear() {
         List<Track> result = trackService.getTracksByIssueYear(LocalDate.now());
         Assertions.assertEquals(1, result.size());
     }
@@ -85,7 +85,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void testGetByDuration(){
+    public void testGetByDuration() {
         Track happySong = new TrackBuilder().startBuilder("Happy Song").addDurationInSeconds(108).addIssueDate(LocalDate.now()).build();
         Track newTrack = this.trackService.create(happySong);
 
@@ -94,7 +94,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void testGetByDurationRange(){
+    public void testGetByDurationRange() {
         Track joySong = new TrackBuilder().startBuilder("Joy Song").addDurationInSeconds(101).addIssueDate(LocalDate.now()).build();
         Track newTrack = this.trackService.create(joySong);
 
@@ -106,6 +106,19 @@ public class TrackServiceTest {
 
     }
 
+    @Test
+    public void testGetTrackByMediaType() {
+        Track joySong = new TrackBuilder().startBuilder("JoySong").addDurationInSeconds(101).addIssueDate(LocalDate.now()).addTrackMediaType(Track.TrackMediaType.MP3).build();
+        Track newTrack = this.trackService.create(joySong);
+
+        Track crySong = new TrackBuilder().startBuilder("CrySong").addDurationInSeconds(200).addIssueDate(LocalDate.now()).addTrackMediaType(Track.TrackMediaType.OGG).build();
+        Track newTrack2 = this.trackService.create(crySong);
+
+        List<Track> result = trackService.getTracksByMediaType(Track.TrackMediaType.MP3);
+        Assertions.assertEquals(2, result.size());
+
+
+    }
 }
 
 
