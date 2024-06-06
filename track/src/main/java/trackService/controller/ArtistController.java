@@ -61,6 +61,7 @@ public class ArtistController {
         URI newResource = uriCreator.getURI(id);
         return ResponseEntity.ok(newResource);
     }
+
 }
 
 
