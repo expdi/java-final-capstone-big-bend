@@ -16,7 +16,7 @@ CREATE TABLE artist
 
 CREATE TABLE album
 (
-    id_album        serial PRIMARY KEY NOT NULL
+    id        serial PRIMARY KEY NOT NULL
 ,   title           varchar(255)
 ,   issue_date       DATE
 );
@@ -33,6 +33,5 @@ CREATE TABLE track
     ,   artist_id               integer
     ,   album_id                integer
     ,   FOREIGN KEY (artist_id) REFERENCES artist(id)
-    ,   FOREIGN KEY (album_id)  REFERENCES album(id_album)
+    ,   FOREIGN KEY (album_id)  REFERENCES album(id)
 );
-
