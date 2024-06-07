@@ -134,15 +134,12 @@ curl --location 'http://localhost:8089' \
                 return 'MP3'
         }
     }
-
-    // setup iterationData
-    const iterationData = [] // array of Postman EnvVar Objects
     
     // Generate data in a loop.
     // The objects generated define the Postman environment variables that will be used while executing the collection.
     // Each object, will be used for one collection run.
     // For our example, iterationData will be an array of objects of the form:
-    iterationData = Array(1000).map((_, idx) => ({
+    const iterationData = Array(1000).map((_, idx) => ({
             baseUrl: 'http://localhost:8089',
             albumId: idx,
             artistId: idx,
