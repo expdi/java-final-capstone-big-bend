@@ -3,6 +3,7 @@ package trackService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import trackService.exception.AlbumNotFoundException;
 import trackService.model.album.Album;
 import trackService.model.artist.Artist;
 import trackService.model.track.Track;
@@ -30,18 +31,21 @@ public class TrackService {
 
     //1.Basic Create, Update, Delete functionality
 
-    public Track create(Track track) {
+    public Track create(Track track) throws AlbumNotFoundException {
         TrackBuilder trackBuilder = new TrackBuilder();
         trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate()).addTrackMediaType(track.getTrackMediaType());
         Artist validArtist = this.artistService.getValidArtist(track.getArtist());
         trackBuilder.addArtist(validArtist);
+        try {
+            Album validAlbum = this.albumService.getValidAlbum(track.getAlbum());
+            trackBuilder.addAlbum(validAlbum);
+            Track builderTrack = trackBuilder.build();
 
-        Album validAlbum = this.albumService.getValidAlbum(track.getAlbum());
-        trackBuilder.addAlbum(validAlbum);
-        Track builderTrack = trackBuilder.build() ;
-
-        trackDAO.create(builderTrack);
-        return builderTrack;
+            trackDAO.create(builderTrack);
+            return builderTrack;
+        } catch (NullPointerException e) {
+            throw new AlbumNotFoundException("No album found for track.");
+        }
     }
 
     public boolean updateTrack(Track track){

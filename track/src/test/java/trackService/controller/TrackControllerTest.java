@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
+import trackService.exception.AlbumNotFoundException;
 import trackService.model.artist.Artist;
 import trackService.model.artist.ArtistBuilder;
 import trackService.model.track.Track;
@@ -66,7 +67,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void testPost() throws URISyntaxException {
+    public void testPost() throws URISyntaxException, AlbumNotFoundException {
         Track sadSong = new TrackBuilder().startBuilder("Sad Song").addDurationInSeconds(108).addIssueDate(LocalDate.now()).build();
         sadSong.setId(0);
 
@@ -78,7 +79,7 @@ public class TrackControllerTest {
 
         Mockito.when(uriCreator.getURI(0)).thenReturn(uri1);
 
-        ResponseEntity<Track> track = controller.createTrack(sadSong);
+        ResponseEntity<?> track = controller.createTrack(sadSong);
 
         Assertions.assertEquals(HttpStatus.CREATED, track.getStatusCode());
 

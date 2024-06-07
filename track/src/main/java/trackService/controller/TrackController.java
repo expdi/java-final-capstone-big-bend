@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import trackService.exception.AlbumNotFoundException;
 import trackService.model.track.Track;
 import trackService.service.TrackService;
 
@@ -39,10 +40,14 @@ public class TrackController {
     }
 
     @PostMapping
-    public ResponseEntity<Track> createTrack(@RequestBody Track track) {
-        Track resultTrack = this.trackService.create(track);
-        URI newResource = uriCreator.getURI(resultTrack.getId());
-        return ResponseEntity.created(newResource).body(resultTrack);
+    public ResponseEntity<?> createTrack(@RequestBody Track track) {
+        try {
+            Track resultTrack = this.trackService.create(track);
+            URI newResource = uriCreator.getURI(resultTrack.getId());
+            return ResponseEntity.created(newResource).body(resultTrack);
+        } catch (AlbumNotFoundException e)  {
+           return ResponseEntity.badRequest().body("album not found");
+        }
     }
 
     @PutMapping
