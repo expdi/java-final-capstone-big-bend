@@ -126,6 +126,9 @@ public class Track {
         this.price = price;
     }
 
+    public UUID getUuid() { return uuid; }
+
+    public void setUuid(UUID uuid) { this.uuid = uuid; }
 
     @Override
     public String toString() {
