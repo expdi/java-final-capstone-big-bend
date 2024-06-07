@@ -9,6 +9,7 @@
   "author": "expi",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "newman": "^6.1.2"
   }
 }
