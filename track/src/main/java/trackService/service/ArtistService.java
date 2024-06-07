@@ -79,9 +79,12 @@ public class ArtistService {
     }
 
     public Artist getValidArtist(Artist artist) {
+        Artist artistById = this.getArtistById(artist.getId());
+        if (artistById != null) {
+            return artistById;
+        }
 
         List<Artist> artistsByName = this.getArtistsByName(artist.getName());
-
         if (artistsByName.size() > 0) {
             return artistsByName.get(0);
         }

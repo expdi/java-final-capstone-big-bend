@@ -3,6 +3,7 @@ package trackService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import trackService.model.album.Album;
 import trackService.model.artist.Artist;
 import trackService.model.track.Track;
 import trackService.model.track.TrackBuilder;
@@ -22,6 +23,9 @@ public class TrackService {
     private ArtistService artistService;
 
     @Autowired
+    private AlbumService albumService;
+
+    @Autowired
     private PricingClient pricingClient;
 
     //1.Basic Create, Update, Delete functionality
@@ -31,6 +35,9 @@ public class TrackService {
         trackBuilder.startBuilder(track.getTitle()).addDurationInSeconds(track.getDurationInSeconds()).addIssueDate(track.getIssueDate()).addTrackMediaType(track.getTrackMediaType());
         Artist validArtist = this.artistService.getValidArtist(track.getArtist());
         trackBuilder.addArtist(validArtist);
+
+        Album validAlbum = this.albumService.getValidAlbum(track.getAlbum());
+        trackBuilder.addAlbum(validAlbum);
         Track builderTrack = trackBuilder.build() ;
 
         trackDAO.create(builderTrack);
