@@ -35,3 +35,6 @@ build/
 .vscode/
 /.idea/
 /.idea/*
+
+## Node Modules ##
+**/node_modules/**
