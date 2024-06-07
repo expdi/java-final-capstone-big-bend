@@ -90,7 +90,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": {{albumId}},\n  \"title\": {{albumTitle}},\n  \"issueDate\": {{issueDate}}\n}",
+					"raw": "{\n  \"title\": \"{{albumTitle}}\",\n  \"issueDate\": \"{{issueDate}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,9 +98,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}",
+					"raw": "{{baseUrl}}/albums",
 					"host": [
 						"{{baseUrl}}"
+					],
+					"path": [
+						"albums"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -147,9 +150,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}",
+					"raw": "{{baseUrl}}/track",
 					"host": [
 						"{{baseUrl}}"
+					],
+					"path": [
+						"track"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
