@@ -1,7 +1,7 @@
 const newman = require('newman')
 const fs = require('node:fs')
 
-const ITERATION_COUNT = 1000
+const ITERATION_COUNT = 10
 const ITERATION_DATA_JSON = './seedIteraionData.json'
 const COLLECTION_JSON = './10 Track Album Creator.postman_collection.json'
 
@@ -45,7 +45,7 @@ function artistNationality(idx) {
 }
 
 function issueDate(idx) {
-    return `20${idx % 10}-${idx % 12}-${idx % 28}`
+    return `202${idx % 10}-07-1${idx % 10}`
 }
 
 function trackLanguage(idx) {
@@ -76,7 +76,9 @@ function trackMediaType(idx) {
 // The objects generated define the Postman environment variables that will be used while executing the collection.
 // Each object, will be used for one collection run.
 // For our example, iterationData will be an array of objects of the form:
-const iterationData = Array(ITERATION_COUNT).map((_, idx) => ({
+const iterationData = Array(ITERATION_COUNT).map((_, idx) => {
+    idx += 1
+    const res = {
         baseUrl: 'http://localhost:8089',
         albumId: idx,
         artistId: idx,
@@ -99,8 +101,9 @@ const iterationData = Array(ITERATION_COUNT).map((_, idx) => ({
         trackTitle08: trackTitle(idx, 8),
         trackTitle09: trackTitle(idx, 9),
         trackTitle10: trackTitle(idx, 10)
-    })
-)
+    }
+    return res
+})
 
 // write iterationData json
 fs.writeFile(ITERATION_DATA_JSON, JSON.stringify(iterationData), err => {console.dir("ERR"); console.error(err);})

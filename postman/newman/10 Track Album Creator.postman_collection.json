@@ -142,7 +142,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"{{trackTitle01}}\",\n    \"issueDate\": \"{{issueDate}}\",\n    \"durationInSeconds\": {{trackDurationInSeconds}},\n    \"trackMediaType\": \"{{trackMediaType}}\",\n    \"language\": \"{{trackLanguage}}\",\n    \"albumId\": {{albumId}},\n    \"artistId\": {{artistId}}\n}",
+					"raw": "{\n\t\"title\": \"{{trackTitle01}}\",\n    \"issueDate\": \"{{issueDate}}\",\n    \"durationInSeconds\": {{trackDurationInSeconds}},\n    \"trackMediaType\": \"{{trackMediaType}}\",\n    \"language\": \"{{trackLanguage}}\",\n    \"album\": {\"id\": {{albumId}}},\n    \"artist\": {\"id\": {{artistId}}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
