@@ -1,10 +1,13 @@
 package trackService.service;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trackService.model.album.Album;
 import trackService.DAO.BaseDAO;
+import trackService.model.artist.Artist;
 
 @Service
 public class AlbumService {
@@ -50,4 +53,11 @@ public class AlbumService {
 //    return this.albumDAO.getByTitle(title);
 //  }
 
+  public Album getValidAlbum(Album artist) {
+    Album album = this.get(artist.getId());
+    if (album != null) {
+      return album;
+    }
+    return this.create(new Album(null, "Unknown Album", Collections.emptySet(), LocalDate.now()));
+  }
 }
