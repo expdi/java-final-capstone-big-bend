@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "a1a58f8a-e540-4d56-bf41-aa0c5a4b0d18",
+		"name": "10 Track Album Creator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34377069"
+	},
+	"item": [
+		{
+			"name": "Create Artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{artistId}},\n\t\"name\": \"{{artistName}}\",\n    \"musicGenre\": \"{{artistMusicGenre}}\",\n    \"nationality\": \"{{artistNationality}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/artist",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artist"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{albumId}},\n  \"title\": {{albumTitle}},\n  \"issueDate\": {{issueDate}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Track 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"{{trackTitle01}}\",\n    \"issueDate\": \"{{issueDate}}\",\n    \"durationInSeconds\": {{trackDurationInSeconds}},\n    \"trackMediaType\": \"{{trackMediaType}}\",\n    \"language\": \"{{trackLanguage}}\",\n    \"albumId\": {{albumId}},\n    \"artistId\": {{artistId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "artistName",
+			"value": "Artist 0",
+			"type": "string"
+		},
+		{
+			"key": "artistNationality",
+			"value": "ENG",
+			"type": "string"
+		},
+		{
+			"key": "artistMusicGenre",
+			"value": "ROCK",
+			"type": "string"
+		},
+		{
+			"key": "albumTitle",
+			"value": "Album 0",
+			"type": "string"
+		},
+		{
+			"key": "issueDate",
+			"value": "2010-01-01",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle01",
+			"value": "Track 01",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle02",
+			"value": "Track 02",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle03",
+			"value": "Track 03",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle04",
+			"value": "Track 04",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle05",
+			"value": "Track 05",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle06",
+			"value": "Track 06",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle07",
+			"value": "Track 07",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle08",
+			"value": "Track 08",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle09",
+			"value": "Track 09",
+			"type": "string"
+		},
+		{
+			"key": "trackTitle10",
+			"value": "Track 10",
+			"type": "string"
+		},
+		{
+			"key": "trackDurationInSeconds",
+			"value": "220",
+			"type": "string"
+		},
+		{
+			"key": "trackMediaType",
+			"value": "FLAC",
+			"type": "string"
+		},
+		{
+			"key": "trackLanguage",
+			"value": "English",
+			"type": "string"
+		},
+		{
+			"key": "artistId",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "albumId",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8089",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "big-bend-newman",
+  "version": "1.0.0",
+  "description": "Neman Procedures for API Testing",
+  "main": "seed-data.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "expi",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^6.1.2"
+  }
+}
