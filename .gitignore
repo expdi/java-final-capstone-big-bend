@@ -35,3 +35,7 @@ build/
 .vscode/
 /.idea/
 /.idea/*
+
+## newman ##
+**/node_modules/**
+**/seedIterationData.js
