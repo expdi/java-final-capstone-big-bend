@@ -20,8 +20,6 @@ public class Track {
 
     @Column(name="uuid")
     private UUID uuid;
-    @Column(name="album")
-    private String album;
     @Column(name="issueDate")
     private LocalDate issueDate;
     @Column(name="durationInSeconds")
@@ -80,11 +78,11 @@ public class Track {
         this.title = title;
     }
 
-    public String getAlbum() {
+    public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(String album) {
+    public void setAlbum(Album album) {
         this.album = album;
     }
 
