@@ -6,16 +6,20 @@ import trackService.model.album.Album;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name="track")
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
     @Column(name="title")
     private String title;
 
+    @Column(name="uuid")
+    private UUID uuid;
     @Column(name="issueDate")
     private LocalDate issueDate;
     @Column(name="durationInSeconds")
@@ -43,6 +47,7 @@ public class Track {
     // empty constructor //
 
     public Track(){this.artist = new Artist();}
+
 
     public Track(String title){this.title=title; this.artist = new Artist();}
 
@@ -127,12 +132,14 @@ public class Track {
         return "Track{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", artist=" + artist +
-                ", album=" + album +
+                ", uuid=" + uuid +
+                ", album='" + album + '\'' +
                 ", issueDate=" + issueDate +
                 ", durationInSeconds=" + durationInSeconds +
                 ", trackMediaType=" + trackMediaType +
                 ", language='" + language + '\'' +
+                ", artist=" + artist +
+                ", price=" + price +
                 '}';
     }
 
