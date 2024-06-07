@@ -53,7 +53,7 @@ podman run -dt --name pricing-postgres -e POSTGRES_USER=capstone -e POSTGRES_PAS
 ```
 Next, open a psql terminal within the container:
 ```
-podman exec -it java-capstone bash!!!****
+podman exec -it pricing-postgres bash!!!****
 psql -U capstone
 ```
 Finally, create the database and user:
