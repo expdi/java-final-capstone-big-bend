@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
+import trackService.model.artist.Artist;
+import trackService.model.artist.ArtistBuilder;
 import trackService.model.track.Track;
 import trackService.model.track.TrackBuilder;
 import trackService.service.TrackService;
@@ -18,6 +20,11 @@ import trackService.service.TrackService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TrackControllerTest {
@@ -139,6 +146,22 @@ public class TrackControllerTest {
         Assertions.assertEquals(HttpStatus.OK, track.getStatusCode());
 
         Mockito.verify(trackService).updateTrack(sadSong);
+
+    }
+
+    @Test
+    public void getAllTracksOk(){
+        Track sadSong = new TrackBuilder().startBuilder("Sad Song").addDurationInSeconds(108).addIssueDate(LocalDate.now()).build();
+        sadSong.setId(0);
+        List<Track> tracks = Arrays.asList(sadSong);
+
+        when(trackService.getAll()).thenReturn(tracks);
+
+        ResponseEntity<?> responseEntity = controller.getAllTracks();
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(responseEntity.getBody()).isEqualTo(tracks);
 
     }
 

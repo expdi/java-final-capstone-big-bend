@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import trackService.model.artist.Artist;
 import trackService.model.artist.ArtistBuilder;
 import trackService.model.track.Track;
-import trackService.repository.BaseDAO;
+import trackService.DAO.BaseDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,10 @@ public class ArtistService {
 
     public Artist create(Artist artist) {
         ArtistBuilder artistBuilder = new ArtistBuilder();
-        artistBuilder.startArtistBuilder(artist.getName()).addMusicGender(artist.getMusicGenre());
+        artistBuilder
+            .startArtistBuilder(artist.getName())
+            .addMusicGender(artist.getMusicGenre())
+            .addNationality(artist.getNationality());
         Artist artistBuild = artistBuilder.build();
         artistDAO.create(artistBuild);
         return artistBuild;

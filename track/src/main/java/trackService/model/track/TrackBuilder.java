@@ -1,5 +1,6 @@
 package trackService.model.track;
 
+import trackService.model.album.Album;
 import trackService.model.artist.Artist;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class TrackBuilder {
 
     private LocalDate issueDate;
 
-    private String album;
+    private Album album = new Album();
 
     private Artist artist = new Artist();
 
@@ -44,7 +45,7 @@ public class TrackBuilder {
 
     }
 
-    public TrackBuilder addAlbum(String album) {
+    public TrackBuilder addAlbum(Album album) {
         this.album = album;
         return this;
     }
