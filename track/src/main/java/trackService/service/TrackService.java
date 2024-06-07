@@ -76,9 +76,13 @@ public boolean deleteTrack(int trackId){
         if (track == null){
             return null;
         }
+        try{
+            double trackPrice = pricingClient.getTrackPrice(track.getUuid());
+            track.setPrice(trackPrice);
+        }catch (Exception ex){
+            System.err.println(ex.getStackTrace());
+        }
 
-        double trackPrice = pricingClient.getTrackPrice(id);
-        track.setPrice(trackPrice);
         return track;
     }
 
